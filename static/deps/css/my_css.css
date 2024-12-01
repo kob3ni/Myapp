@@ -1,10 +1,29 @@
 body {
   background-image: url("../images/bg-image.jpg");
+  padding-top: 70px;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center center;
   background-size: cover;
   height: 100%;
+}
+
+.fixed-header {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  z-index: 1000; /* Устанавливаем высокий z-index, чтобы шапка была поверх контента */
+  background-color: #fff; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень для визуального эффекта */
+}
+
+.blur {
+  backdrop-filter: blur(3px);
+}
+
+.custom-bg {
+  background: rgba(255, 255, 255, 0.61);
 }
 
 .dropdown-toggle::after {

@@ -7,7 +7,7 @@
 {% endblock css %}
 
 {% block content %}
-<section class="container rounded p-3 mb-3 bg-light py-5">
+<section class="container rounded p-3 mb-3 custom-bg py-5">
     <div class="container">
         <h1 class="text-center mb-4 my-4">Куда полетим?</h1>
         <form action="/search" class="row g-3">
@@ -30,13 +30,13 @@
     </div>
 </section>
 
-<section class="container rounded p-3 mb-3 bg-light py-5">
-    <div class="container">
+<section class="container rounded p-3 mb-3 custom-bg py-5">
+    <div class="container ">
         <h2 class="text-center mb-4">Популярные направления</h2>
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
-                    <img src="{% static 'deps/images/destination1.jpg' %}" class="card-img-top" alt="Destination">
+                    <img src="{% static 'deps/icons/destination-fresh-96.png' %}" hspace="10" vspace="5" alt="Destination" style="width: 30px; height: 30px;">
                     <div class="card-body">
                         <h5 class="card-title">Москва → Санкт-Петербург</h5>
                         <p class="card-text">от 2 000 ₽</p>
@@ -46,7 +46,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <img src="{% static 'deps/images/destination2.jpg' %}" class="card-img-top" alt="Destination">
+                    <img src="{% static 'deps/icons/destination-fresh-96.png' %}" hspace="10" vspace="5" alt="Destination" style="width: 30px; height: 30px;">
                     <div class="card-body">
                         <h5 class="card-title">Нью-Йорк → Лондон</h5>
                         <p class="card-text">от 300 $</p>
@@ -56,7 +56,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <img src="{% static 'deps/images/destination3.jpg' %}" class="card-img-top" alt="Destination">
+                    <img src="{% static 'deps/icons/destination-fresh-96.png' %}" hspace="10" vspace="5" alt="Destination" style="width: 30px; height: 30px;">
                     <div class="card-body">
                         <h5 class="card-title">Берлин → Париж</h5>
                         <p class="card-text">от 100 €</p>
@@ -68,24 +68,36 @@
     </div>
 </section>
 
-<section class="py-5">
+<section class="container rounded p-3 mb-3 custom-bg py-5">
     <div class="container">
         <h2 class="text-center mb-4">Почему выбирают нас?</h2>
         <div class="row text-center">
             <div class="col-md-4">
-                <img src="{% static 'deps/icons/price-tag.svg' %}" alt="Low Price" width="50" height="50">
-                <h5 class="mt-3">Лучшие цены</h5>
-                <p>Мы гарантируем низкие цены на авиабилеты без скрытых сборов.</p>
+                <div class="card">
+                    <div class="card-body">
+                        <img src="{% static 'deps/icons/price-fresh-96.png' %}" alt="Low Price" width="30" height="30">
+                        <h5 class="mt-3">Лучшие цены</h5>
+                        <p>Мы гарантируем низкие цены на авиабилеты без скрытых сборов.</p>
+                    </div>
+                </div>
             </div>
             <div class="col-md-4">
-                <img src="{% static 'deps/icons/support.svg' %}" alt="Support" width="50" height="50">
-                <h5 class="mt-3">Поддержка 24/7</h5>
-                <p>Наша команда всегда готова помочь вам с вопросами и бронированием.</p>
+                <div class="card">
+                    <div class="card-body">
+                        <img src="{% static 'deps/icons/support-fresh-96.png' %}" alt="Support" width="30" height="30">
+                        <h5 class="mt-3">Поддержка 24/7</h5>
+                        <p>Наша команда всегда готова помочь вам с вопросами и бронированием.</p>
+                    </div>
+                </div>
             </div>
             <div class="col-md-4">
-                <img src="{% static 'deps/icons/fast.svg' %}" alt="Fast Booking" width="50" height="50">
-                <h5 class="mt-3">Быстрое бронирование</h5>
-                <p>Находите и бронируйте билеты за считанные минуты.</p>
+                <div class="card">
+                    <div class="card-body">
+                        <img src="{% static 'deps/icons/booking-fresh-96.png.' %}" alt="Fast Booking" width="30" height="30">
+                        <h5 class="mt-3">Быстрое бронирование</h5>
+                        <p>Находите и бронируйте билеты за считанные минуты.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -93,7 +105,7 @@
 {% endblock content %}
 
 {% block footer %}
-<footer class="py-3 custom-bg border">
+<footer class="py-3">
     <div class="container">
         <p class="m-0 text-center text-black">Copyright &copy; Airplane Tickets 2024</p>
     </div>
