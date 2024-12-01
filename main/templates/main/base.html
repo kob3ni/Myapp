@@ -1,0 +1,100 @@
+
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "deps/css/bootstrap/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "deps/css/my_css.css" %}">
+    <!-- Стиль footer-a для главной страницы -->
+    {% block css %}
+
+    {% endblock css %}
+    <!-- Favicons for different platforms -->
+    <link rel="airplane-fresh-96" sizes="180x180" href="{% static "deps/favicon/airplane-fresh-96.png" %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static "deps/favicon/airplane-fresh-32.png" %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static "deps/favicon/airplane-fresh-16.png" %}">
+    <link rel="manifest" href="{% static "deps/favicon/favicon-16x16.png" %}">
+    <title>{{ title }}</title>
+</head>
+
+<body>
+    <header class="fixed-header">
+        <nav class="navbar navbar-expand-lg light-bg" data-bs-theme="light">
+            <div class="container">               
+                <a class="navbar-brand" href="{% url "main:index" %}">
+                    <img src="{% static "deps/favicon/airplane-fresh-96.png" %}" alt="Airplane logo" width="30" height="30">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Левое меню -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link  text-black" href="carts/cart.html">Авиабилеты</a>
+                        </li>
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle text-black" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Информация
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item  text-black" href="#">Онлайн табло</a></li>
+                                <li><a class="dropdown-item  text-black" href="#">Тарифы</a></li>
+                                <li><a class="dropdown-item  text-black" href="{% url "main:about" %}">О нас</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- Правое меню -->
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link  text-black" href="users/login.html">Войти</a>
+                        </li>
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle text-black" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{% static "deps/favicon/profile-fresh-96.png" %}" alt="Profile Icon" width="20" height="20"> Профиль
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item  text-black" href="carts/cart.html">Корзина</a></li>
+                                <li><a class="dropdown-item  text-black" href="users/profile.html">Личный кабинет</a>
+                                </li>
+                                <li><a class="dropdown-item  text-black" href="#">Админ панель</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item  text-black" href="#">Выйти</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section>
+        
+        <!-- Контент -->
+        <div class="container">
+            <!-- Контент на странице -->
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+    </section>
+    {% block footer %}
+
+    {% endblock footer %}
+    <script src="{% static "deps/js/jquery/jquery-3.7.0.min.js" %}"></script>
+    <script src="{% static "deps/js/jquery-events.js" %}"></script>
+    <script src="{% static "deps/js/jquery-ajax.js" %}"></script>
+    <script src="{% static "deps/js/bootstrap/bootstrap.bundle.min.js" %}"></script>
+</body>
+
+</html>
