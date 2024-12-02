@@ -23,12 +23,29 @@
             <div class="col-md-2">
                 <input type="date" class="form-control" placeholder="Дата обратно" name="return-date">
             </div>
+
             <div class="col-md-2">
                 <button type="submit" class="btn btn-primary w-100">Найти билеты</button>
+            </div>
+
+                        
+            <div class="col-md-3">
+                <input type="number" class="form-control" placeholder="Количество пассажиров" name="passengers" required>
+            </div>
+            
+            <!-- Выбор тарифа -->
+            <div class="col-md-3">
+                <input type="text" list="options" class="form-control" placeholder="Класс" name="tariff" required>
+                <datalist id="options">
+                    <option value="Эконом">
+                    <option value="Комфорт">
+                    <option value="Бизнес">
+                  </datalist>
             </div>
         </form>
     </div>
 </section>
+
 
 <section class="container rounded p-3 mb-3 custom-bg py-5">
     <div class="container ">

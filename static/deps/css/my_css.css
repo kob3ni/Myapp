@@ -1,5 +1,5 @@
 body {
-  background-image: url("../images/bg-image.jpg");
+  background-image: url("../images/bg-image-art.jpg");
   padding-top: 70px;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -19,7 +19,7 @@ body {
 }
 
 .blur {
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(2px);
 }
 
 .custom-bg {
