@@ -1,0 +1,43 @@
+.ticket-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.flight-time {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.flight-info {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.duration {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.ticket-price {
+    text-align: center;
+}
+
+.price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #212529;
+}
+
+.btn-buy {
+    font-size: 1rem;
+    padding: 10px 20px;
+}
+
+.vertical-divider {
+    border-left: 1px solid #ddd;
+    height: 100%;
+}
