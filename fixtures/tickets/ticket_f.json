@@ -1,0 +1,1 @@
+[{"model": "tickets.ticket_flights", "pk": 1, "fields": {"fare_conditions": "Эконом", "amount": "4105.00", "flight_id": 1, "ticket_no": 1}}]

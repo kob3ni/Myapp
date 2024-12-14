@@ -1,0 +1,1 @@
+[{"model": "tickets.seats", "pk": 1, "fields": {"fare_conditions": "Эконом", "aircraft_code": 4}}]

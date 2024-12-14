@@ -75,26 +75,26 @@
         </form>
       </div>
 
-      {% for ticket in tickets %}
+      {% for ticket in flights %}
         <!-- Карта билета -->
         <div class="container mt-5">
           <div class="ticket-card row">
             <!-- Левая колонка: информация о рейсе -->
             <div class="col-lg-8">
               <div class="d-flex justify-content-between">
-                <h5>{{ticket.direction_to}}</h5>
+                <h5>{{ticket.departure_airport.city}} → {{ticket.arrival_airport.city}}</h5>
                 <div>
-                  <div class="flight-time">16:25</div>
-                  <div class="flight-info">5 декабря</div>
-                  <div class="flight-info">Шереметьево</div>
+                  <div class="flight-time">{{ticket.departure_time|date:"H:i"}}</div>
+                  <div class="flight-info"> {{ticket.departure_time|date:"d M"}}</div>
+                  <div class="flight-info">{{ticket.departure_airport}}</div>
                 </div>
                 <div>
-                  <div class="flight-time">20:20</div>
-                  <div class="flight-info">5 декабря</div>
-                  <div class="flight-info">Адлер (AER)</div>
+                  <div class="flight-time">{{ticket.arrival_time|date:"H:i"}}</div>
+                  <div class="flight-info">{{ticket.arrival_time|date:"d M"}}</div>
+                  <div class="flight-info">{{ticket.arrival_airport}}</div>
                 </div>
                 <div>
-                  <div class="duration">3 ч 55 м</div>
+                  <div class="duration">{{ ticket.get_flight_duration }}</div>
                   <div class="flight-info">Без пересадок</div>
                 </div>
               </div>
