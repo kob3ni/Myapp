@@ -127,30 +127,34 @@
             <div class="col-lg-3 ticket-price">
               <div class="price">{{ticket.price}} ₽</div>
               <div class="flight-info">За всех пассажиров</div>
-              <button class="btn btn-primary mt-5">Купить</button>
+              <button class="btn btn-primary mt-5">Бронировать</button>
             </div>
           </div>
         </div>
       {% endfor %}
     </div>
+
     <!-- Пагинация -->
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center my-4">
         <div class="custom-shadow d-flex">
-          <li class="page-item disabled">
-            <a class="page-link">Previous</a>
+
+          <li class="page-item {% if not flights.has_previous %}disabled{% endif %}">
+            <a class="page-link" href="{% if flights.has_previous %}?page={{flights.previous_page_number}}{% else %}
+            #
+            {% endif %}">Предыдущая</a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="#">1</a>
+
+          {% for page in flights.paginator.page_range %}
+          <li class="page-item {% if flights.number == page %} active {% endif %}">
+            <a class="page-link" href="?page={{page}}">{{page}}</a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="#">2</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">3</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+          {% endfor %}
+          
+          <li class="page-item {% if not flights.has_next %}disable{% endif %}">
+            <a class="page-link" href="{% if flights.has_next %}?page={{flights.next_page_number}}{% else %}
+            #
+            {% endif %}">Следующая</a>
           </li>
         </div>
       </ul>

@@ -70,6 +70,7 @@ class Flights(models.Model):
         db_table = 'flight'
         verbose_name = 'Рейс'
         verbose_name_plural = 'Рейсы'
+        ordering = ("id",)
         
     def __str__(self):
         return f'{self.departure_airport} → {self.arrival_airport} ({self.departure_time:%Y-%m-%d %H:%M})'
