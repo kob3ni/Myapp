@@ -1,5 +1,6 @@
 {% extends 'main/base.html' %}
 {% load static %}
+{% load tickets_tags %}
 
 {% block css %}
   <link rel="stylesheet" href="{% static 'deps/css/ticket.css' %}" />
@@ -52,23 +53,21 @@
       <div class="dropdown mb-2">
         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Фильтры</button>
 
-        <form action="" method="get" class="dropdown-menu" data-bs-theme="light">
-          <div class="form-check text-black mx-3">
-            <input class="form-check-input" type="checkbox" name="on_sale" id="flexCheckDefault" value="on" />
-            <input type="hidden" name="q" value="request.GET.q" />
-            <label class="form-check-label" for="flexCheckDefault">Товары по акции</label>
-          </div>
+        <form action="{% url "flight:index" %}" method="get" class="dropdown-menu" data-bs-theme="light">
           <p class="text-black mx-3 mt-3">Сортировать:</p>
           <div class="form-check text-black mx-3">
-            <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault1" value="default" checked />
+            <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault1" value="default" 
+            {% if not request.Get.order_by or request.Get.order_by == 'default' %}checked{% endif %}/>
             <label class="form-check-label" for="flexRadioDefault1">По умолчанию</label>
           </div>
           <div class="form-check text-black mx-3">
-            <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault2" value="price" />
+            <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault2" value="total_amount" 
+            {% if request.GET.order_by == 'total_amount' %}checked{% endif %}/>
             <label class="form-check-label" for="flexRadioDefault2">От дешевых к дорогим</label>
           </div>
           <div class="form-check text-black mx-3">
-            <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault3" value="-price" />
+            <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault3" value="-total_amount" 
+            {% if request.GET.order_by == '-total_amount' %}checked{% endif %}/>
             <label class="form-check-label" for="flexRadioDefault3">От дорогих к дешевым</label>
           </div>
           <button type="submit" class="btn btn-primary mx-3 mt-3">Применить</button>
@@ -140,21 +139,17 @@
         <div class="custom-shadow d-flex">
 
           <li class="page-item {% if not flights.has_previous %}disabled{% endif %}">
-            <a class="page-link" href="{% if flights.has_previous %}?page={{flights.previous_page_number}}{% else %}
-            #
-            {% endif %}">Предыдущая</a>
+            <a class="page-link" href="{% if flights.has_previous %}?{% change_params page=flights.previous_page_number %}{% else %}#{% endif %}">Предыдущая</a>
           </li>
 
           {% for page in flights.paginator.page_range %}
           <li class="page-item {% if flights.number == page %} active {% endif %}">
-            <a class="page-link" href="?page={{page}}">{{page}}</a>
+            <a class="page-link" href="?{% change_params page=page %}">{{page}}</a>
           </li>
           {% endfor %}
           
           <li class="page-item {% if not flights.has_next %}disable{% endif %}">
-            <a class="page-link" href="{% if flights.has_next %}?page={{flights.next_page_number}}{% else %}
-            #
-            {% endif %}">Следующая</a>
+            <a class="page-link" href="{% if flights.has_next %}?{% change_params page=flights.next_page_number %}{% else %}#{% endif %}">Следующая</a>
           </li>
         </div>
       </ul>
