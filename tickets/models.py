@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.db import models
 from datetime import timedelta
 
@@ -93,6 +94,7 @@ class Flights(models.Model):
             return f"{int(hours)} ч {int(minutes)} мин"
         else:
             return "Нет данных"
+
                 
 class Ticket_flights(models.Model):
     fare_conditions = models.CharField(max_length=10, verbose_name='Класс обслуживания')
@@ -105,8 +107,6 @@ class Ticket_flights(models.Model):
         verbose_name = 'Перелет'
         verbose_name_plural = 'Перелеты'
     
-    
-        
 class Seats(models.Model):
     fare_conditions = models.CharField(max_length=10, verbose_name='Класс обслуживания')
     aircraft_code = models.ForeignKey(to=Airports, on_delete=models.CASCADE, verbose_name='Код самолета')

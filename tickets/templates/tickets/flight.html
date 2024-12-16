@@ -1,4 +1,4 @@
-{% extends 'main/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% load tickets_tags %}
 
@@ -9,18 +9,18 @@
 {% block header %}
   <section class="container py-4">
     <div class="container">
-      <form action="/search" class="row g-3">
+      <form action="{% url "flight:search" %}" method="get" class="row g-3">
         <div class="col-md-3">
-          <input type="text" class="form-control" placeholder="Откуда" name="from" required />
+          <input type="search" class="form-control" placeholder="Откуда" name="from" required />
         </div>
         <div class="col-md-3">
-          <input type="text" class="form-control" placeholder="Куда" name="to" required />
+          <input type="search" class="form-control" placeholder="Куда" name="to" required />
         </div>
         <div class="col-md-2">
-          <input type="date" class="form-control" placeholder="Дата туда" name="departure-date" required />
+          <input type="date" class="form-control" placeholder="Дата туда" name="departure_date" required />
         </div>
         <div class="col-md-2">
-          <input type="date" class="form-control" placeholder="Дата обратно" name="return-date" />
+          <input type="date" class="form-control" placeholder="Дата обратно" name="return_date" />
         </div>
 
         <div class="col-md-2">
@@ -33,7 +33,7 @@
 
         <!-- Выбор тарифа -->
         <div class="col-md-3">
-          <input type="text" list="options" class="form-control" placeholder="Класс" name="tariff" required />
+          <input type="search" list="options" class="form-control" placeholder="Класс" name="tariff" required />
           <datalist id="options">
             <option value="Эконом"></option>
             <option value="Комфорт"></option>
@@ -53,7 +53,13 @@
       <div class="dropdown mb-2">
         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Фильтры</button>
 
-        <form action="{% url "flight:index" %}" method="get" class="dropdown-menu" data-bs-theme="light">
+        <form action="{% if request.GET.from and request.GET.to and request.GET.departure_date or return_date %}{% url "flight:search" %}{% else %}{% url "flight:index" %}{% endif %}" method="get" class="dropdown-menu" data-bs-theme="light">
+          <!-- Передаем параметры поиска как скрытые поля -->
+          <input type="hidden" name="from" value="{{ request.GET.from }}">
+          <input type="hidden" name="to" value="{{ request.GET.to }}">
+          <input type="hidden" name="departure_date" value="{{ request.GET.departure_date }}">
+          <input type="hidden" name="return_date" value="{{ request.GET.return_date }}">
+
           <p class="text-black mx-3 mt-3">Сортировать:</p>
           <div class="form-check text-black mx-3">
             <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault1" value="default" 
@@ -124,9 +130,11 @@
 
             <!-- Правая колонка: цена и кнопка -->
             <div class="col-lg-3 ticket-price">
-              <div class="price">{{ticket.price}} ₽</div>
-              <div class="flight-info">За всех пассажиров</div>
-              <button class="btn btn-primary mt-5">Бронировать</button>
+              {% for ticket_flight in ticket.ticket_flights.all %}
+                <div class="price">{{ticket_flight.amount }} ₽</div>
+                <div class="flight-info">За {{ request.GET.passengers }} пассажиров</div>
+                <button class="btn btn-primary mt-5">Бронировать</button>
+              {% endfor %}
             </div>
           </div>
         </div>

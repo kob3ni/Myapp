@@ -1,5 +1,5 @@
 
-{% extends "main/base.html" %}
+{% extends "base.html" %}
 {%load static%}
 
 {% block css %}
@@ -10,18 +10,18 @@
 <section class="container rounded p-3 mb-3 custom-bg py-5">
     <div class="container">
         <h1 class="text-center mb-4 my-4">Куда полетим?</h1>
-        <form action="/search" class="row g-3">
+        <form action="{% url "flight:search" %}" method="get" class="row g-3">
             <div class="col-md-3">
-                <input type="text" class="form-control" placeholder="Откуда" name="from" required>
+                <input type="search" class="form-control" placeholder="Откуда" name="from" required>
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control" placeholder="Куда" name="to" required>
+                <input type="search" class="form-control" placeholder="Куда" name="to" required>
             </div>
             <div class="col-md-2">
-                <input type="date" class="form-control" placeholder="Дата туда" name="departure-date" required>
+                <input type="date" class="form-control" placeholder="Дата туда" name="departure_date" required>
             </div>
             <div class="col-md-2">
-                <input type="date" class="form-control" placeholder="Дата обратно" name="return-date">
+                <input type="date" class="form-control" placeholder="Дата обратно" name="return_date">
             </div>
 
             <div class="col-md-2">

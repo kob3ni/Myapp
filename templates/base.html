@@ -54,7 +54,7 @@
                     <!-- Правое меню -->
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link  text-black" href="users/login.html">Войти</a>
+                            <a class="nav-link  text-black" href="{% url "users:login" %}">Войти</a>
                         </li>
                         <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle text-black" href="#" role="button"
@@ -63,13 +63,13 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item  text-black" href="carts/cart.html">Корзина</a></li>
-                                <li><a class="dropdown-item  text-black" href="users/profile.html">Личный кабинет</a>
+                                <li><a class="dropdown-item  text-black" href="{% url "users:profile" %}">Личный кабинет</a>
                                 </li>
                                 <li><a class="dropdown-item  text-black" href="{% url "admin:index" %}">Админ панель</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item  text-black" href="#">Выйти</a></li>
+                                <li><a class="dropdown-item  text-black" href="{% url "users:logout" %}">Выйти</a></li>
                             </ul>
                         </li>
                     </ul>
