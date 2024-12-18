@@ -1,6 +1,6 @@
 from decimal import Decimal
 from django.core.paginator import Paginator
-from django.db.models import F, DecimalField, ExpressionWrapper, IntegerField, Min, OuterRef, Subquery
+from django.db.models import F, DecimalField, ExpressionWrapper
 from django.shortcuts import render
 from tickets.models import Flights
 from tickets.utils import arrival_date_search, departure_date_search, from_search, tariff_search, to_search
