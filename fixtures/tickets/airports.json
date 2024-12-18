@@ -1,1 +1,56 @@
-[{"model": "tickets.aircrafts", "pk": 1, "fields": {"model": "Ту-214"}}, {"model": "tickets.aircrafts", "pk": 2, "fields": {"model": "МС-21"}}, {"model": "tickets.aircrafts", "pk": 3, "fields": {"model": "Boeing 737 MAX"}}, {"model": "tickets.aircrafts", "pk": 4, "fields": {"model": "Airbus A319"}}]
+[
+    {
+        "model": "tickets.airports",
+        "pk": 1,
+        "fields": {
+            "airport_name": "Адлер",
+            "city": "Сочи",
+            "iata_code": "AER"
+        }
+    },
+    {
+        "model": "tickets.airports",
+        "pk": 2,
+        "fields": {
+            "airport_name": "Симферополь",
+            "city": "Симферополь",
+            "iata_code": "SIP"
+        }
+    },
+    {
+        "model": "tickets.airports",
+        "pk": 3,
+        "fields": {
+            "airport_name": "Пулково",
+            "city": "Санкт-Петербург",
+            "iata_code": "LED"
+        }
+    },
+    {
+        "model": "tickets.airports",
+        "pk": 4,
+        "fields": {
+            "airport_name": "Внуково",
+            "city": "Москва",
+            "iata_code": "VKO"
+        }
+    },
+    {
+        "model": "tickets.airports",
+        "pk": 5,
+        "fields": {
+            "airport_name": "Домодедово",
+            "city": "Москва",
+            "iata_code": "DME"
+        }
+    },
+    {
+        "model": "tickets.airports",
+        "pk": 6,
+        "fields": {
+            "airport_name": "Шереметьево",
+            "city": "Москва",
+            "iata_code": "SVO"
+        }
+    }
+]

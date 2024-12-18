@@ -1,1 +1,35 @@
-[{"model": "tickets.aircrafts", "pk": 1, "fields": {"model": "Ту-214"}}, {"model": "tickets.aircrafts", "pk": 2, "fields": {"model": "МС-21"}}, {"model": "tickets.aircrafts", "pk": 3, "fields": {"model": "Boeing 737 MAX"}}, {"model": "tickets.aircrafts", "pk": 4, "fields": {"model": "Airbus A319"}}]
+[
+    {
+        "model": "tickets.flights",
+        "pk": 1,
+        "fields": {
+            "departure_time": "2024-12-24T11:20:00Z",
+            "arrival_time": "2024-12-24T13:46:00Z",
+            "departure_airport": 4,
+            "arrival_airport": 1,
+            "aircraft_code": 2
+        }
+    },
+    {
+        "model": "tickets.flights",
+        "pk": 2,
+        "fields": {
+            "departure_time": "2024-12-26T07:45:00Z",
+            "arrival_time": "2024-12-26T10:25:00Z",
+            "departure_airport": 5,
+            "arrival_airport": 2,
+            "aircraft_code": 4
+        }
+    },
+    {
+        "model": "tickets.flights",
+        "pk": 3,
+        "fields": {
+            "departure_time": "2024-12-29T22:43:00Z",
+            "arrival_time": "2024-12-30T01:05:00Z",
+            "departure_airport": 3,
+            "arrival_airport": 2,
+            "aircraft_code": 1
+        }
+    }
+]

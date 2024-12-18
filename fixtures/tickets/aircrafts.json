@@ -1,1 +1,0 @@
-[{"model": "tickets.aircrafts", "pk": 1, "fields": {"model": "Ту-214"}}, {"model": "tickets.aircrafts", "pk": 2, "fields": {"model": "МС-21"}}, {"model": "tickets.aircrafts", "pk": 3, "fields": {"model": "Boeing 737 MAX"}}, {"model": "tickets.aircrafts", "pk": 4, "fields": {"model": "Airbus A319"}}]
