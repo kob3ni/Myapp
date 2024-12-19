@@ -1,9 +1,10 @@
 from decimal import Decimal
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.paginator import Paginator
 from django.db.models import F, DecimalField, ExpressionWrapper
 from django.shortcuts import get_object_or_404, redirect, render
+from tickets.forms import FlightForm
 from tickets.models import Flights, Booking, Tariff
 
 def flight(request):
@@ -114,5 +115,34 @@ def delete_booking(request, booking_id):
     # Проверяем, что пользователь является администратором или стаффом
     if request.user.is_staff or request.user.is_superuser:
         booking.delete()  # Удаляем бронирование
+        messages.success(request, "Бронирование было успешно удалено.")
     
     return redirect('users:profile')
+
+def is_staff(user):
+    return user.is_staff or user.is_superuser
+
+@login_required
+@user_passes_test(is_staff)
+def create_flight(request):
+    if request.method == 'POST':
+        form = FlightForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Рейс успешно создан!')
+            return redirect('tickets:index')  
+    else:
+        form = FlightForm()
+
+    return render(request, 'tickets/create_flight.html', {'form': form})
+
+# Представление для удаления рейса
+@login_required
+@user_passes_test(is_staff)
+def delete_flight(request, flight_id):
+    flight = get_object_or_404(Flights, id=flight_id)
+    if request.user.is_staff or request.user.is_superuser:
+        flight.delete()
+        messages.success(request, "Рейс был успешно удален.")
+        
+    return redirect('flight:index')

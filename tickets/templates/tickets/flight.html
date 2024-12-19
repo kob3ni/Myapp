@@ -47,6 +47,7 @@
 
 {% block content %}
   <div class="container" style="margin-top:220px;">
+    
     <!-- Контент на странице -->
     <div class="row">
       <!-- Форма фильтров -->
@@ -81,6 +82,15 @@
           <button type="submit" class="btn btn-primary mx-3 mt-3">Применить</button>
         </form>
       </div>
+
+      <!-- Кнопки для админа и стаффа создать рейс и удалить рейс-->
+      {% if user.is_staff or user.is_superuser %}
+        <div class="col-12 mb-3">
+          <a href="{% url 'tickets:create_flight' %}" class="btn btn-success">Создать рейс</a>
+        </div>
+      {% endif %}
+
+      {% include 'includes/notifications.html' %}
 
       {% for flight in flights %}
         <!-- Карта билета -->
@@ -137,6 +147,13 @@
                   <div class="price">{{ flight.final_price|floatformat:2 }} ₽</div>
                   <div class="flight-info">За {{ request.GET.passengers }} пассажиров</div>
                   <a class="btn btn-primary" href="{% url 'tickets:book_flight' flight.id %}">Бронировать</a>
+                  {% if user.is_staff or user.is_superuser %}
+                    <!-- Кнопка удаления рейса -->
+                    <form action="{% url 'tickets:delete_flight' flight.id %}" method="post">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-danger mt-2" onclick="return confirm('Вы уверены, что хотите удалить этот рейс?')">Удалить рейс</button>
+                    </form>
+                  {% endif %}
             </div>
           </div>
         </div>

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container bg-white p-4 rounded shadow">
+    <h2>Создать новый рейс</h2>
+
+    <form method="POST">
+      {% csrf_token %}
+      
+      <div class="mb-3">
+        <label for="{{ form.departure_airport.id_for_label }}" class="form-label">Аэропорт отправления</label>
+        {{ form.departure_airport }}
+      </div>
+      
+      <div class="mb-3">
+        <label for="{{ form.arrival_airport.id_for_label }}" class="form-label">Аэропорт прибытия</label>
+        {{ form.arrival_airport }}
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="departure_time" class="form-label">Дата и время вылета</label>
+          <div class="input-group">
+            <input type="datetime-local" name="departure_time" id="departure_time" class="form-control" value="{{ form.departure_time.value|date:'Y-m-d\TH:i' }}" />
+            
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="arrival_time" class="form-label">Дата и время прилета</label>
+          <div class="input-group">
+            <input type="datetime-local" name="arrival_time" id="arrival_time" class="form-control" value="{{ form.arrival_time.value|date:'Y-m-d\TH:i' }}" />
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="{{ form.price.id_for_label }}" class="form-label">Цена</label>
+        {{ form.price }}
+      </div>
+
+      <div class="mb-3">
+        <label for="{{ form.aircraft_code.id_for_label }}" class="form-label">Код самолета</label>
+        {{ form.aircraft_code }}
+      </div>
+
+      <button type="submit" class="btn btn-success">Создать рейс</button>
+    </form>
+  </div>
+{% endblock %}
