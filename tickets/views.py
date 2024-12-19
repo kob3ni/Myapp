@@ -14,7 +14,7 @@ def flight(request):
     to_location = request.GET.get('to', None)
     departure_date = request.GET.get('departure_date', None)
     return_date = request.GET.get('return_date', None)
-    passengers = int(request.GET.get('passengers', 1))
+    passengers = int(request.GET.get('passengers', 1) or '1')
     tariff_name = request.GET.get('tariff', None)
 
     flights = Flights.objects.all()
@@ -85,7 +85,7 @@ def book_flight(request, flight_id):
     # Получение данных о рейсе
     flight = get_object_or_404(Flights, id=flight_id)
 
-    passengers = int(request.session.get('passengers', 1))  # Получаем количество пассажиров
+    passengers = int(request.session.get('passengers', 1) or '1')  # Получаем количество пассажиров
     tariff_name = request.session.get('tariff_name', 'Эконом')  # Получаем тариф
     final_price = Decimal(request.session.get('final_price', 0))  # Получаем final_price
 
@@ -115,7 +115,7 @@ def delete_booking(request, booking_id):
     # Проверяем, что пользователь является администратором или стаффом
     if request.user.is_staff or request.user.is_superuser:
         booking.delete()  # Удаляем бронирование
-        messages.success(request, "Бронирование было успешно удалено.")
+        messages.success(request, "Бронирование было успешно удален.")
     
     return redirect('users:profile')
 

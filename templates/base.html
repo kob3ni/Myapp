@@ -56,7 +56,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item  text-black" href="{% url "users:profile" %}">Личный кабинет</a>
                                     </li>
-                                    {% if user.is_admin or user.is_staff %}
+                                    {% if user.is_superuser %}
                                         <li><a class="dropdown-item  text-black" href="{% url "admin:index" %}">Админ панель</a></li>
                                     {% endif %}
                                     <li>
@@ -79,7 +79,7 @@
         <!-- Контент -->
         <div class="container">
             <!-- Контент на странице -->
-             {% include "includes/notifications.html" %}
+            {% include "includes/notifications.html" %}
             {% block content %}
 
             {% endblock content %}
@@ -90,7 +90,6 @@
     {% endblock footer %}
     <script src="{% static "deps/js/jquery/jquery-3.7.0.min.js" %}"></script>
     <script src="{% static "deps/js/jquery-events.js" %}"></script>
-    <script src="{% static "deps/js/jquery-ajax.js" %}"></script>
     <script src="{% static "deps/js/jquery-count.js" %}"></script>
     <script src="{% static "deps/js/bootstrap/bootstrap.bundle.min.js" %}"></script>
     

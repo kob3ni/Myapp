@@ -9,4 +9,6 @@ urlpatterns = [
     path('registration/', views.registration, name='registration'),
     path('profile/', views.profile, name='profile'),
     path('logout/', views.logout, name='logout'),
+    path('export/bookings/json/', views.export_bookings_json, name='export_bookings_json'),
+    path('export/bookings/xlsx/', views.export_bookings_xlsx, name='export_bookings_xlsx'),
 ]

@@ -52,12 +52,6 @@ class Flights(models.Model):
         return f'{self.departure_airport.city} → {self.arrival_airport.city} ({self.departure_time:%Y-%m-%d %H:%M})'
     
     def get_flight_duration(self):
-        """
-        Вычисляет длительность полета.
-
-        :param flight: Экземпляр модели Flights
-        :return: Строка в формате "X ч Y мин"
-        """
         if self.departure_time and self.arrival_time:
             # Вычисляем разницу между временем прибытия и временем вылета
             duration = self.arrival_time - self.departure_time
@@ -82,15 +76,12 @@ class Tariff(models.Model):
         return self.name
                 
 class Booking(models.Model):
-    """
-    Таблица для хранения информации о билетах.
-    """
-    flight = models.ForeignKey(Flights, related_name='bookings', on_delete=models.CASCADE)
-    passengers = models.PositiveIntegerField()  # Количество пассажиров
-    tariff = models.ForeignKey(Tariff, on_delete=models.CASCADE)  # Тариф
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)  # Итоговая цена за бронирование
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Пользователь, сделавший бронирование
-    created_at = models.DateTimeField(auto_now_add=True)
+    flight = models.ForeignKey(Flights, related_name='bookings', on_delete=models.CASCADE, verbose_name='Рейс')
+    passengers = models.PositiveIntegerField(verbose_name='Пассажиры')  # Количество пассажиров
+    tariff = models.ForeignKey(Tariff, on_delete=models.CASCADE, verbose_name='Класс обслуживания')  # Тариф
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Полная сумма')  # Итоговая цена за бронирование
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')  # Пользователь, сделавший бронирование
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания брони')
     
     class Meta:
         db_table = 'booking'

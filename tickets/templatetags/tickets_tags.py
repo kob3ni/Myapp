@@ -1,6 +1,6 @@
 from django import template
 from django.utils.http import urlencode
-from tickets.models import Flights, Airports
+from tickets.models import Flights
 
 register = template.Library()
 
@@ -15,8 +15,5 @@ def change_params(context, **kwargs):
     return urlencode(query)
 
 @register.filter
-def multiply(value, arg):
-    try:
-        return int(value) * int(arg)
-    except (ValueError, TypeError):
-        return value
+def is_in_group(user, group_name):
+    return user.groups.filter(name=group_name).exists()
