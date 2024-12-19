@@ -7,5 +7,5 @@ app_name = 'tickets'
 urlpatterns = [
     path('', views.flight, name='index'),
     path('search/', views.flight, name='search'),
-    path('booking/', views.booking, name='booking'),
+    path('book/<int:flight_id>/', views.book_flight, name='book_flight'),
 ]

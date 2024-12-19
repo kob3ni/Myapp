@@ -136,7 +136,7 @@
             <div class="col-lg-3 ticket-price">
                   <div class="price">{{ flight.final_price|floatformat:2 }} ₽</div>
                   <div class="flight-info">За {{ request.GET.passengers }} пассажиров</div>
-                  <button class="btn btn-primary mt-5">Бронировать</button> 
+                  <a class="btn btn-primary" href="{% url 'tickets:book_flight' flight.id %}">Бронировать</a>
             </div>
           </div>
         </div>

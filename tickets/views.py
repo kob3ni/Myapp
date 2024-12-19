@@ -1,9 +1,10 @@
 from decimal import Decimal
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import F, DecimalField, ExpressionWrapper
-from django.shortcuts import render
-from tickets.models import Flights
-from tickets.utils import arrival_date_search, departure_date_search, from_search, tariff_search, to_search
+from django.shortcuts import get_object_or_404, redirect, render
+from tickets.models import Flights, Booking, Tariff
 
 def flight(request):
     page = request.GET.get('page', 1)
@@ -25,7 +26,6 @@ def flight(request):
     if departure_date:
         flights = flights.filter(departure_time__date=departure_date)
     
-    # Применение фильтра по тарифу
     # Применение фильтра по тарифу
     if tariff_name:
         if tariff_name == 'Комфорт':
@@ -54,6 +54,13 @@ def flight(request):
     if return_date:
         flights = flights.annotate(final_price=F('final_price') + F('adjusted_price') * passengers)
 
+    # Сохранение final_price, пассажиров и тарифа в сессии для дальнейшего использования
+    if flights.exists():
+        final_price = flights.first().final_price
+        request.session['final_price'] = str(final_price)
+        request.session['passengers'] = passengers
+        request.session['tariff_name'] = tariff_name
+        
     # Сортировка
     if order_by and order_by != "default":
         if order_by == "price":
@@ -72,5 +79,30 @@ def flight(request):
     }
     return render(request, 'tickets/flight.html', context)
 
-def booking(request):
-    return render(request, 'tickets/booking.html')
+@login_required
+def book_flight(request, flight_id):
+    # Получение данных о рейсе
+    flight = get_object_or_404(Flights, id=flight_id)
+
+    passengers = int(request.session.get('passengers', 1))  # Получаем количество пассажиров
+    tariff_name = request.session.get('tariff_name', 'Эконом')  # Получаем тариф
+    final_price = Decimal(request.session.get('final_price', 0))  # Получаем final_price
+
+    # Получение тарифа
+    tariff = get_object_or_404(Tariff, name=tariff_name)
+    
+    # Создание записи бронирования
+    booking = Booking.objects.create(
+        flight=flight,
+        passengers=passengers,
+        tariff=tariff,
+        total_price=final_price,
+        user=request.user
+    )
+    booking.save()
+
+    # Сообщение пользователю
+    messages.success(request, 'Ваше бронирование успешно создано!')
+
+    # Перенаправление на страницу с бронированиями
+    return redirect('users:profile') 

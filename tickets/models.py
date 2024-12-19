@@ -1,5 +1,7 @@
 from decimal import Decimal
 from django.db import models
+
+from users.models import User
         
 class Airports(models.Model):
     airport_name = models.TextField(verbose_name='Название аэропорта')
@@ -87,6 +89,7 @@ class Booking(models.Model):
     passengers = models.PositiveIntegerField()  # Количество пассажиров
     tariff = models.ForeignKey(Tariff, on_delete=models.CASCADE)  # Тариф
     total_price = models.DecimalField(max_digits=10, decimal_places=2)  # Итоговая цена за бронирование
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Пользователь, сделавший бронирование
     created_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:
@@ -95,5 +98,5 @@ class Booking(models.Model):
         verbose_name_plural = 'Бронирования'
 
     def __str__(self):
-        return f"Ticket for {self.flight} ({self.tariff}) - {self.price} ₽"
+        return f"Ticket for {self.flight} ({self.tariff}) - {self.total_price} ₽"
     

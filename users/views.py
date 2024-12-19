@@ -3,6 +3,7 @@ from django.contrib import auth, messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from tickets.models import Booking
 
 from users.forms import ProfileForm, UserLoginForm, UserRegistrationForm
 
@@ -59,9 +60,13 @@ def profile(request):
     else:
         form = ProfileForm(instance=request.user)
         
+    # Получение бронирований текущего пользователя
+    bookings = Booking.objects.filter(user=request.user)
+    
     context = {
         'title': 'Avia - Профиль',
-        'form': form
+        'form': form,
+        'bookings': bookings  # Передаем бронирования в контекст
     }
     return render(request, 'users/profile.html', context)
 

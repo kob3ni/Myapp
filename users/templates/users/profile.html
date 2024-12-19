@@ -76,14 +76,17 @@
                 <ul class="list-group">
                   {% for booking in bookings %}
                     <li class="list-group-item">
-                      <strong>Билет:</strong> {{ booking.ticket_name }}<br>
-                      <strong>Дата:</strong> {{ booking.date }}<br>
-                      <strong>Стоимость:</strong> {{ booking.price }} руб.
+                      <strong>Номер бронирования:</strong> {{ booking.id }}<br>
+                      <strong>Рейс:</strong> {{ booking.flight }}<br>
+                      <strong>Количество пассажиров:</strong> {{ booking.passengers }}<br>
+                      <strong>Тариф:</strong> {{ booking.tariff.name }}<br>
+                      <strong>Цена:</strong> {{ booking.total_price }} ₽<br>
+                      <strong>Дата бронирования:</strong> {{ booking.created_at|date:"d.m.Y H:i" }}
                     </li>
                   {% endfor %}
                 </ul>
               {% else %}
-                <p class="text-center">У вас нет забронированных билетов.</p>
+                <p>У вас пока нет забронированных билетов.</p>
               {% endif %}
             </div>
           </div>
