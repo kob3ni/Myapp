@@ -106,3 +106,13 @@ def book_flight(request, flight_id):
 
     # Перенаправление на страницу с бронированиями
     return redirect('users:profile') 
+
+def delete_booking(request, booking_id):
+    # Получаем бронирование по ID
+    booking = get_object_or_404(Booking, id=booking_id)
+    
+    # Проверяем, что пользователь является администратором или стаффом
+    if request.user.is_staff or request.user.is_superuser:
+        booking.delete()  # Удаляем бронирование
+    
+    return redirect('users:profile')
