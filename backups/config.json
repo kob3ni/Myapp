@@ -1,0 +1,13 @@
+{
+    "DB_SETTINGS": {
+        "DB_NAME": "avia_tickets",
+        "DB_USER": "avia",
+        "DB_PASSWORD": "avia",
+        "DB_HOST": "localhost",
+        "DB_PORT": "5432"
+    },
+    "YANDEX_DISK": {
+        "YANDEX_TOKEN": "y0_AgAAAABemnoNAAz8jQAAAAEc5Ei7AABfxhoOam9GiJEahzJ6Y4YiDEbYkA",
+        "YANDEX_DIR": "/backups"
+    }
+}

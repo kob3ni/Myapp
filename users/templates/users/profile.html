@@ -72,12 +72,10 @@
         <div class="col-md-7">
           <div class="bg-white p-4 mb-4 mx-2 rounded">
             <h3 class="text-center mb-4">Бронирования</h3>
-            {% if request.user|is_in_group:"Сотрудники" or user.is_superuser %}
               <div class="d-flex justify-content-end mb-3">
                 <a href="{% url 'users:export_bookings_json' %}" class="btn btn-secondary me-2">Выгрузить в JSON</a>
                 <a href="{% url 'users:export_bookings_xlsx' %}" class="btn btn-secondary">Выгрузить в XLSX</a>
               </div>
-            {% endif %}
             <div class="container" id="booking-items-container">
               {% if bookings %}
                 <ul class="list-group">
@@ -89,6 +87,15 @@
                       <strong>Тариф:</strong> {{ booking.tariff.name }}<br>
                       <strong>Цена:</strong> {{ booking.total_price }} ₽<br>
                       <strong>Дата бронирования:</strong> {{ booking.created_at|date:"d.m.Y H:i" }}
+                      
+                      <div class="mt-3">
+                        <form action="{% url 'users:cancel_booking' booking.id %}" method="post" style="display:inline;">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-warning btn-sm" onclick="return confirm('Вы уверены, что хотите отменить это бронирование?')">
+                            Отменить бронирование
+                          </button>
+                        </form>
+                      </div>
 
                       {% if request.user|is_in_group:"Сотрудники" or user.is_superuser %}
                         <strong>Забронировал:</strong> {{ booking.user.get_full_name }} ({{ booking.user.username }})<br>

@@ -2,7 +2,7 @@ import csv
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth, messages
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from tickets.models import Booking
 from openpyxl import Workbook
@@ -137,3 +137,13 @@ def export_bookings_xlsx(request):
     wb.save(response)
 
     return response
+
+@login_required
+def cancel_booking(request, booking_id):
+    """Отменяет бронирование пользователя."""
+    booking = get_object_or_404(Booking, id=booking_id, user=request.user)
+
+    # Удаление бронирования
+    booking.delete()
+    messages.success(request, f"Бронирование №{booking_id} успешно отменено.")
+    return redirect('users:profile')
